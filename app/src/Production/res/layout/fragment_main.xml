@@ -20,10 +20,11 @@
              android:orientation="vertical">
 
              <LinearLayout
-                 android:layout_width="wrap_content"
+                 android:layout_width="match_parent"
                  android:layout_height="wrap_content"
                  android:layout_gravity="center_vertical"
                  android:padding="5dp"
+                 android:weightSum="2"
                  >
                  <TextView
                      android:layout_width="wrap_content"
@@ -31,7 +32,9 @@
                      android:textSize="25sp"
                      android:textStyle="bold"
                      android:textColor="#0c81ed"
+                     android:layout_weight="1"
                      android:text="LONDON"/>
+
              </LinearLayout>
 
             <LinearLayout
@@ -49,17 +52,17 @@
 
                     <ImageView
                         android:id="@+id/iv_london_weather"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/temperature"/>
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"/>
 
                     <TextView
                         android:id="@+id/tv_london_weather"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:textColor="#000000"
                         android:textSize="20sp"
-                        android:text="Sunny"/>
+                        android:text=""/>
                 </LinearLayout>
 
 
@@ -72,16 +75,16 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/temperature"/>
+                        android:src="@drawable/temp"/>
 
                     <TextView
                         android:id="@+id/tv_london_temp"
                         android:layout_width="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="38%"
                         android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:text="38%"/>
+                        android:textSize="20sp" />
 
                 </LinearLayout>
 
@@ -126,18 +129,16 @@
                     >
                     <ImageView
                         android:id="@+id/iv_prague_weather"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/temperature"/>
-
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"/>
                     <TextView
                         android:id="@+id/tv_prague_weather"
                         android:layout_width="wrap_content"
-                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:textColor="#000000"
                         android:textSize="20sp"
-                        android:text="Sunny"/>
+                        android:text=""/>
                 </LinearLayout>
 
 
@@ -150,7 +151,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/temperature"/>
+                        android:src="@drawable/temp" />
 
                     <TextView
                         android:id="@+id/tv_prague_temp"
@@ -204,9 +205,8 @@
                     >
                     <ImageView
                         android:id="@+id/iv_sf_weather"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/temperature"/>
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"/>
                     <TextView
                         android:id="@+id/tv_sf_weather"
                         android:layout_width="wrap_content"
@@ -214,7 +214,7 @@
                         android:layout_gravity="center"
                         android:textColor="#000000"
                         android:textSize="20sp"
-                        android:text="Sunny"/>
+                        android:text=""/>
                 </LinearLayout>
 
 
@@ -227,7 +227,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/temperature"/>
+                        android:src="@drawable/temp"/>
 
                     <TextView
                         android:id="@+id/tv_sf_temp"
@@ -244,6 +244,12 @@
 
 
         </LinearLayout>
+        <Button
+            android:id="@+id/btn_Refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tap here to refresh"/>
 
     </LinearLayout>
 

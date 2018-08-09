@@ -34,7 +34,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-public class WeatherDetailFragment extends Fragment {
+
+public class FragmentSFData extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -43,8 +44,6 @@ public class WeatherDetailFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private London london;
-    private Bitmap icon;
     ImageView iv_icons;
     TextView tv_weather;
     TextView tv_desc;
@@ -52,10 +51,10 @@ public class WeatherDetailFragment extends Fragment {
     TextView tv_speed;
     TextView tv_deg;
     FragmentManager manager;
-    private Bitmap london_icon = null;
 
+    private Bitmap sf_icon = null;
 
-    public WeatherDetailFragment() {
+    public FragmentSFData() {
         // Required empty public constructor
     }
 
@@ -68,8 +67,8 @@ public class WeatherDetailFragment extends Fragment {
      * @return A new instance of fragment WeatherDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WeatherDetailFragment newInstance(String param1, String param2) {
-        WeatherDetailFragment fragment = new WeatherDetailFragment();
+    public static FragmentSFData newInstance(String param1, String param2) {
+        FragmentSFData fragment = new FragmentSFData();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -84,29 +83,25 @@ public class WeatherDetailFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            london = (London) bundle.getSerializable("MY_BUNDLE");
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_weather_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment_sfdata, container, false);
         manager = getFragmentManager();
         // Inflate the layout for this fragment
-         tv_weather = view.findViewById(R.id.tv_weather);
-         tv_desc = view.findViewById(R.id.tv_desc);
-         tv_temp = view.findViewById(R.id.tv_temp);
-         tv_speed = view.findViewById(R.id.tv_speed);
+        tv_weather = view.findViewById(R.id.tv_weather);
+        tv_desc = view.findViewById(R.id.tv_desc);
+        tv_temp = view.findViewById(R.id.tv_temp);
+        tv_speed = view.findViewById(R.id.tv_speed);
         iv_icons = view.findViewById(R.id.iv_icons);
 
-        tv_desc.setText(GlobalVariables.london_data.getDescription());
-        tv_speed.setText(GlobalVariables.london_data.getSpeed());
-        tv_temp.setText(GlobalVariables.london_data.getTemp()+"°C");
-        tv_weather.setText(GlobalVariables.london_data.getMain());
-        iv_icons.setImageBitmap(GlobalVariables.london_data.getIcons());
+        tv_desc.setText(GlobalVariables.sf_data.getDescription());
+        tv_speed.setText(GlobalVariables.sf_data.getSpeed());
+        tv_temp.setText(GlobalVariables.sf_data.getTemp() + "°C");
+        tv_weather.setText(GlobalVariables.sf_data.getMain());
+        iv_icons.setImageBitmap(GlobalVariables.sf_data.getIcons());
         Button back =view.findViewById(R.id.back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,9 +121,9 @@ public class WeatherDetailFragment extends Fragment {
                 task.execute();
             }
         });
+
         return view;
     }
-
     private class GetDetails extends AsyncTask<String, Void, String> {
         private ProgressDialog progressDialog = new ProgressDialog(getContext());
         @Override
@@ -146,37 +141,39 @@ public class WeatherDetailFragment extends Fragment {
         protected String doInBackground(String... strings) {
             InputStream is = null;
             try {
-                //GET DETAILS FOR LONDON WEATHER
-                JSONObject london = new ApiMethods(getContext()).GetWeatherLondon();
+                //GET DETAILS FOR SF WEATHER
+                JSONObject sa = new ApiMethods(getContext()).GetWeatherSF();
 
-                JSONObject data = new JSONObject(london.getString("Data").replaceAll("null","\"\""));
+                JSONObject sa_data = new JSONObject(sa.getString("Data").replaceAll("null","\"\""));
 
-                JSONArray weather = data.getJSONArray("weather");
-                JSONObject JSONWeather = weather.getJSONObject(0);
-                GlobalVariables.london_data =  new London();
-                GlobalVariables.london_data.setId(String.valueOf(JSONWeather.get("id")));
-                GlobalVariables.london_data.setMain(String.valueOf(JSONWeather.get("main")));
-                GlobalVariables.london_data.setDescription(String.valueOf(JSONWeather.get("description")));
-                GlobalVariables.london_data.setIcon(String.valueOf(JSONWeather.get("icon")));
+                JSONArray sa_weather = sa_data.getJSONArray("weather");
+                JSONObject JSONSAWeather = sa_weather.getJSONObject(0);
+                GlobalVariables.sf_data =  new San_Francisco();
+                GlobalVariables.sf_data.setId(String.valueOf(JSONSAWeather.get("id")));
+                GlobalVariables.sf_data.setMain(String.valueOf(JSONSAWeather.get("main")));
+                GlobalVariables.sf_data.setDescription(String.valueOf(JSONSAWeather.get("description")));
+                GlobalVariables.sf_data.setIcon(String.valueOf(JSONSAWeather.get("icon")));
 
-                JSONObject main = new JSONObject(data.getString("main"));
-                GlobalVariables.london_data.setTemp(String.valueOf(main.get("temp")));
+                JSONObject sa_main = new JSONObject(sa_data.getString("main"));
+                GlobalVariables.sf_data.setTemp(String.valueOf(sa_main.get("temp")));
 
-                JSONObject wind = new JSONObject(data.getString("wind"));
-                GlobalVariables.london_data.setSpeed(String.valueOf(wind.get("speed")));
+                JSONObject sa_wind = new JSONObject(sa_data.getString("wind"));
+                GlobalVariables.sf_data.setSpeed(String.valueOf(sa_wind.get("speed")));
 
 
 
-                String urlOfLondonicon = "http://openweathermap.org/img/w/"+GlobalVariables.london_data.getIcon()+".png";
+                String urlOfSFicon = "http://openweathermap.org/img/w/"+GlobalVariables.sf_data.getIcon()+".png";
                 try {
-                    is = new URL(urlOfLondonicon).openStream();
+                    is = new URL(urlOfSFicon).openStream();
 
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                london_icon = BitmapFactory.decodeStream(is);
-                GlobalVariables.london_data.setIcons(london_icon);
+                sf_icon = BitmapFactory.decodeStream(is);
+                GlobalVariables.sf_data.setIcons(sf_icon);
+
+
 
 
             } catch (JSONException e) {
@@ -189,11 +186,11 @@ public class WeatherDetailFragment extends Fragment {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            tv_desc.setText(GlobalVariables.london_data.getDescription());
-            tv_speed.setText(GlobalVariables.london_data.getSpeed());
-            tv_temp.setText(GlobalVariables.london_data.getTemp()+"°C");
-            tv_weather.setText(GlobalVariables.london_data.getMain());
-            iv_icons.setImageBitmap(GlobalVariables.london_data.getIcons());
+            tv_desc.setText(GlobalVariables.sf_data.getDescription());
+            tv_speed.setText(GlobalVariables.sf_data.getSpeed());
+            tv_temp.setText(GlobalVariables.sf_data.getTemp() + "°C");
+            tv_weather.setText(GlobalVariables.sf_data.getMain());
+            iv_icons.setImageBitmap(GlobalVariables.sf_data.getIcons());
 
             progressDialog.dismiss();
         }
@@ -201,6 +198,4 @@ public class WeatherDetailFragment extends Fragment {
 
 
     }
-
-
 }

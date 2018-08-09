@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.WeatherDetailFragment">
+    tools:context="com.bryanalegria.exam.weatherapp.Fragment.FragmentSFData">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -41,7 +40,7 @@
                     android:id="@+id/tv_Name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="London"/>
+                    android:text="San Francisco"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -119,7 +118,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:text="Tap here to refresh"/>
-
-
 
 </FrameLayout>
