@@ -3,6 +3,8 @@ package com.bryanalegria.exam.weatherapp.Fragment;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -27,13 +29,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MainFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link MainFragment#newInstance} factory method to
  * create an instance of this fragment.
@@ -52,7 +57,9 @@ public class MainFragment extends Fragment {
     private London london_data;
     private Prague prague_model;
     private San_Francisco sa_model;
-
+    private Bitmap london_icon = null;
+    private Bitmap prague_icon = null;
+    private Bitmap sf_icon = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -174,6 +181,7 @@ public class MainFragment extends Fragment {
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         protected String doInBackground(String... strings) {
+            InputStream is = null;
             try {
                 //GET DETAILS FOR LONDON WEATHER
                 JSONObject london = new ApiMethods(getContext()).GetWeatherLondon();
@@ -194,6 +202,15 @@ public class MainFragment extends Fragment {
                 JSONObject wind = new JSONObject(data.getString("wind"));
                 london_data.setSpeed(String.valueOf(wind.get("speed")));
 
+                String urlOfLondonicon = "http://openweathermap.org/img/w/"+london_data.getIcon()+".png";
+                try {
+                    is = new URL(urlOfLondonicon).openStream();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                london_icon = BitmapFactory.decodeStream(is);
 
                 //GET DETAILS FOR PRAGUE WEATHER
                 JSONObject porgue = new ApiMethods(getContext()).GetWeatherPorgue();
@@ -206,13 +223,23 @@ public class MainFragment extends Fragment {
                 prague_model.setId(String.valueOf(JSONPorgueWeather.get("id")));
                 prague_model.setMain(String.valueOf(JSONPorgueWeather.get("main")));
                 prague_model.setDescription(String.valueOf(JSONPorgueWeather.get("description")));
-                prague_model.setIcon(String.valueOf(JSONWeather.get("icon")));
+                prague_model.setIcon(String.valueOf(JSONPorgueWeather.get("icon")));
 
                 JSONObject porgue_main = new JSONObject(porgue_data.getString("main"));
                 prague_model.setTemp(String.valueOf(porgue_main.get("temp")));
 
                 JSONObject porgue_wind = new JSONObject(porgue_data.getString("wind"));
                 prague_model.setSpeed(String.valueOf(porgue_wind.get("speed")));
+
+                String urlOfpragueicon = "http://openweathermap.org/img/w/"+prague_model.getIcon()+".png";
+                try {
+                    is = new URL(urlOfpragueicon).openStream();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                prague_icon = BitmapFactory.decodeStream(is);
 
 
                 //GET DETAILS FOR SF WEATHER
@@ -233,7 +260,20 @@ public class MainFragment extends Fragment {
 
                 JSONObject sa_wind = new JSONObject(sa_data.getString("wind"));
                 sa_model.setSpeed(String.valueOf(sa_wind.get("speed")));
-                
+
+
+                String urlOfSFicon = "http://openweathermap.org/img/w/"+sa_model.getIcon()+".png";
+                try {
+                    is = new URL(urlOfSFicon).openStream();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                sf_icon = BitmapFactory.decodeStream(is);
+
+
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -247,12 +287,17 @@ public class MainFragment extends Fragment {
             super.onPostExecute(s);
             tv_london_weather.setText(london_data.getDescription());
             tv_london_temp.setText(london_data.getTemp() +"°C");
+            iv_london_weather.setImageBitmap(london_icon);
 
-            tv_prague_temp.setText(prague_model.getDescription());
+            String test = prague_model.getDescription();
+
+            tv_prague_weather.setText(test);
             tv_prague_temp.setText(prague_model.getTemp() + "°C" );
+            iv_prague_weather.setImageBitmap(prague_icon);
 
             tv_sf_weather.setText(sa_model.getDescription());
             tv_sf_temp.setText(sa_model.getTemp() +"°C");
+            iv_sf_weather.setImageBitmap(sf_icon);
 
             progressDialog.dismiss();
         }

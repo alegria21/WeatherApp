@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Weather App</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="api_url_london">https://api.openweathermap.org/data/2.5/weather?q=London&amp;mode=json&amp;units=metric&amp;APPID=6db6d904eeb1321f2103c080f2f15f06</string>
+    <string name="api_url_porgue">https://api.openweathermap.org/data/2.5/weather?q=Prague&amp;mode=json&amp;units=metric&amp;APPID=6db6d904eeb1321f2103c080f2f15f06</string>
+    <string name="api_url_sf">https://api.openweathermap.org/data/2.5/weather?q=San+Francisco&amp;mode=json&amp;units=metric&amp;APPID=6db6d904eeb1321f2103c080f2f15f06</string>
+
+    <string name="celsius_sign">°C</string>
+</resources>
