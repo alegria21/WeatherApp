@@ -1,5 +1,7 @@
 package com.bryanalegria.exam.weatherapp.Model;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class London implements Serializable {
@@ -10,6 +12,7 @@ public class London implements Serializable {
     private String temp;
     private String speed;
     private String deg;
+    private Bitmap icons;
 
     public String getId() {
         return id;
@@ -65,5 +68,13 @@ public class London implements Serializable {
 
     public void setDeg(String deg) {
         this.deg = deg;
+    }
+
+    public Bitmap getIcons() {
+        return icons;
+    }
+
+    public void setIcons(Bitmap icons) {
+        this.icons = icons;
     }
 }

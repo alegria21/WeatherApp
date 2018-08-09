@@ -1,5 +1,7 @@
 package com.bryanalegria.exam.weatherapp.Model;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
 public class San_Francisco implements Serializable {
@@ -10,6 +12,16 @@ public class San_Francisco implements Serializable {
     private String temp;
     private String speed;
     private String deg;
+    private Bitmap icons;
+
+    public Bitmap getIcons() {
+        return icons;
+    }
+
+    public void setIcons(Bitmap icons) {
+        this.icons = icons;
+    }
+
 
     public String getId() {
         return id;

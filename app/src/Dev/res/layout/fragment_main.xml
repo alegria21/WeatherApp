@@ -72,7 +72,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/temperature"/>
+                        android:src="@drawable/temp"/>
 
                     <TextView
                         android:id="@+id/tv_london_temp"
@@ -148,7 +148,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/temperature" />
+                        android:src="@drawable/temp" />
 
                     <TextView
                         android:id="@+id/tv_prague_temp"
@@ -224,7 +224,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/temperature"/>
+                        android:src="@drawable/temp"/>
 
                     <TextView
                         android:id="@+id/tv_sf_temp"

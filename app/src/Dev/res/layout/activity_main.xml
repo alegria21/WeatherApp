@@ -14,18 +14,17 @@
         android:layout_marginBottom="1dp"
         android:layout_alignParentTop="true">
 
-        <fragment
-            android:id="@+id/Main"
-            android:name="com.bryanalegria.exam.weatherapp.Fragment.MainFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_main" />
-        <fragment
-            android:id="@+id/Details"
-            android:name="com.bryanalegria.exam.weatherapp.Fragment.WeatherDetailFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout="@layout/fragment_main" />
+        <!--<fragment-->
+            <!--android:id="@+id/Main"-->
+            <!--android:name="com.bryanalegria.exam.weatherapp.Fragment.MainFragment"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--tools:layout="@layout/fragment_main" />-->
+        <!--<fragment-->
+            <!--android:id="@+id/Details"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--tools:layout="@layout/fragment_main" />-->
 
 
     </FrameLayout>

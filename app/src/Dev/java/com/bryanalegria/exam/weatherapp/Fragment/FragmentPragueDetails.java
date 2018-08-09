@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bryanalegria.exam.weatherapp.API.GlobalVariables;
-import com.bryanalegria.exam.weatherapp.Model.London;
+
 import com.bryanalegria.exam.weatherapp.R;
 
-public class WeatherDetailFragment extends Fragment {
+public class FragmentPragueDetails extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -24,8 +24,6 @@ public class WeatherDetailFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private London london;
-    private Bitmap icon;
     ImageView iv_icons;
     TextView tv_weather;
     TextView tv_desc;
@@ -34,7 +32,7 @@ public class WeatherDetailFragment extends Fragment {
     TextView tv_deg;
     FragmentManager manager;
 
-    public WeatherDetailFragment() {
+    public FragmentPragueDetails() {
         // Required empty public constructor
     }
 
@@ -47,8 +45,8 @@ public class WeatherDetailFragment extends Fragment {
      * @return A new instance of fragment WeatherDetailFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static WeatherDetailFragment newInstance(String param1, String param2) {
-        WeatherDetailFragment fragment = new WeatherDetailFragment();
+    public static FragmentPragueDetails newInstance(String param1, String param2) {
+        FragmentPragueDetails fragment = new FragmentPragueDetails();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,34 +61,27 @@ public class WeatherDetailFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            london = (London) bundle.getSerializable("MY_BUNDLE");
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_weather_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment_prague_details, container, false);
         manager = getFragmentManager();
         // Inflate the layout for this fragment
-         tv_weather = view.findViewById(R.id.tv_weather);
-         tv_desc = view.findViewById(R.id.tv_desc);
-         tv_temp = view.findViewById(R.id.tv_temp);
-         tv_speed = view.findViewById(R.id.tv_speed);
+        tv_weather = view.findViewById(R.id.tv_weather);
+        tv_desc = view.findViewById(R.id.tv_desc);
+        tv_temp = view.findViewById(R.id.tv_temp);
+        tv_speed = view.findViewById(R.id.tv_speed);
         iv_icons = view.findViewById(R.id.iv_icons);
 
-        tv_desc.setText(GlobalVariables.london_data.getDescription());
-        tv_speed.setText(GlobalVariables.london_data.getSpeed());
-        tv_temp.setText(GlobalVariables.london_data.getTemp()+"°C");
-        tv_weather.setText(GlobalVariables.london_data.getMain());
-        iv_icons.setImageBitmap(GlobalVariables.london_data.getIcons());
+        tv_desc.setText(GlobalVariables.prague_data.getDescription());
+        tv_speed.setText(GlobalVariables.prague_data.getSpeed());
+        tv_temp.setText(GlobalVariables.prague_data.getTemp() + "°C");
+        tv_weather.setText(GlobalVariables.prague_data.getMain());
+        iv_icons.setImageBitmap(GlobalVariables.prague_data.getIcons());
 
         return view;
     }
-
-
-
-
 }
+
