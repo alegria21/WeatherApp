@@ -16,6 +16,7 @@ import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -146,7 +147,15 @@ public class MainFragment extends Fragment {
         iv_london_weather = (ImageView) view.findViewById(R.id.iv_london_weather);
         iv_prague_weather = (ImageView) view.findViewById(R.id.iv_prague_weather);
         iv_sf_weather = (ImageView) view.findViewById(R.id.iv_sf_weather);
+        Button btn_Refresh = view.findViewById(R.id.btn_Refresh);
 
+        btn_Refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GetDetails task = new GetDetails();
+                task.execute();
+            }
+        });
 
 
 
